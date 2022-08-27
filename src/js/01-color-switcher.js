@@ -4,19 +4,19 @@ startBtn: document.querySelector('button[data-start]'),
 stopBtn: document.querySelector('button[data-stop]'),
 }
 
-refs.startBtn.addEventListener('click', start);
-refs.stopBtn.addEventListener('click', stop);
+refs.startBtn.addEventListener('click', onStart);
+refs.stopBtn.addEventListener('click', onStop);
 
 let intervalId = null;
 
-function start() {
+function onStart() {
     changeColor();
     refs.startBtn.disabled = true;
     refs.stopBtn.disabled = false;
     intervalId = setInterval(changeColor, 1000);
 }
 
-function stop() {
+function onStop() {
     refs.startBtn.disabled = false;
     refs.stopBtn.disabled = true;
     clearInterval(intervalId);
