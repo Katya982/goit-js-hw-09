@@ -1,6 +1,6 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
-import Notiflix from 'notiflix';
+// import Notiflix from 'notiflix';
 
 const refs = {    
     startBtn: document.querySelector('button[data-start]'),
@@ -52,7 +52,7 @@ function countDown() {
 };
 
 function updateInputValue() {
-  const { days, hours, minutes, seconds } = convertMs(deltaTime);
+  const { days, hours, minutes, seconds } = convertMs( deltaTime );
 
   refs.days.textContent = addNull(days);
   refs.hours.textContent = addNull(hours);
@@ -77,3 +77,5 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 };
+
+
