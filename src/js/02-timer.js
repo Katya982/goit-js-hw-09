@@ -10,9 +10,9 @@ const refs = {
     seconds: document.querySelector('[data-seconds]'),
 }
 
-const intervalId = null;
-const selectedDate = 0;
-const deltaTime = 0;
+let intervalId = null;
+let selectedDate = 0;
+let deltaTime = 0;
 
 
 const options = {
@@ -23,6 +23,10 @@ const options = {
     onClose(selectedDates) {      
         selectedDate = selectedDates[0].getTime();      
         deltaTime = selectedDate - Date.now();
+      
+        if (selectedDate < Date.now()) {
+            return;
+      };
 
         refs.startBtn.disabled = false;
         updateInputValue();
@@ -52,7 +56,7 @@ function countDown() {
 };
 
 function updateInputValue() {
-  const { days, hours, minutes, seconds } = convertMs( deltaTime );
+  const { days, hours, minutes, seconds } = convertMs(deltaTime);
 
   refs.days.textContent = addNull(days);
   refs.hours.textContent = addNull(hours);
@@ -77,5 +81,4 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 };
-
 

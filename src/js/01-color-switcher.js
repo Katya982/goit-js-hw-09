@@ -48,3 +48,5 @@ function changeColor() {
 //    refs.startBtn.disabled = false;
 //    refs.stopBtn.disabled = true;
 // });
+
+
