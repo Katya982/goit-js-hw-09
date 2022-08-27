@@ -1,6 +1,6 @@
 import flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.min.css";
-// import Notiflix from 'notiflix';
+
 
 const refs = {    
     startBtn: document.querySelector('button[data-start]'),
@@ -29,7 +29,7 @@ const options = {
       };
 
         refs.startBtn.disabled = false;
-        updateInputValue();
+        
     },
     onValueUpdate() {
         clearInterval(intervalId);
@@ -58,13 +58,13 @@ function countDown() {
 function updateInputValue() {
   const { days, hours, minutes, seconds } = convertMs(deltaTime);
 
-  refs.days.textContent = addNull(days);
-  refs.hours.textContent = addNull(hours);
-  refs.minutes.textContent = addNull(minutes);
-  refs.seconds.textContent = addNull(seconds);
+  refs.days.textContent = formatValue(days);
+  refs.hours.textContent = formatValue(hours);
+  refs.minutes.textContent = formatValue(minutes);
+  refs.seconds.textContent = formatValue(seconds);
 }
 
-function addNull(value) {
+function formatValue(value) {
     return String(value).padStart(2, 0);
 }
 
