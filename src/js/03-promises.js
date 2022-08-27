@@ -1,10 +1,46 @@
+const refs = {
+  delay:document.querySelector('[name="delay"]'),
+  step:document.querySelector('[name="step"]'),
+  amount:document.querySelector('[name="amount"]'),
+  btnPromise:document.querySelector('button[type="submit"]'),
+};
+
 function createPromise(position, delay) {
-  const shouldResolve = Math.random() > 0.3;
-  if (shouldResolve) {
-    // Fulfill
-  } else {
-    // Reject
-  }
+  const newPromise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const shouldResolve = Math.random() > 0.3;
+      if (shouldResolve) {
+        resolve({ position, delay });
+      } else {
+        reject({ position, delay });
+      }
+    }, delay);
+  });
+  return newPromise;
 }
 
+refs.btnPromise.addEventListener('click',  onPromis);
 
+function onPromis (e) {
+  e.preventDefault();
+  let firstDelay = Number(refs.delay.value);
+  let delayStep = Number(refs.step.value);
+  for (let i = 0; i < refs.amount.value; i++) {
+    createPromise(1 + i, firstDelay + i * delayStep)
+      .then(({ position, delay }) =>  {
+        console.log(`✅ Fulfilled promise ${position} in ${delay}ms`)
+      })
+      .catch(({ position, delay }) => {
+          console.log(`❌ Rejected promise ${position} in ${delay}ms`)
+      });
+  }
+};
+  
+// createPromise(2, 1500)
+//   .then(({ position, delay }) => {
+//     console.log(`✅ Fulfilled promise ${position} in ${delay}ms`);
+//   })
+//   .catch(({ position, delay }) => {
+//     console.log(`❌ Rejected promise ${position} in ${delay}ms`);
+//   });
+ 
